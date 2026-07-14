@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { CartProvider } from "@/contexts/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -38,7 +38,8 @@ const App = () => (
           <Routes>
             {/* Admin routes — separate layout, no Navbar/Footer */}
             <Route path="/admin-dashboard" element={<AdminLayout />}>
-              <Route index element={<DashboardPage />} />
+              <Route index element={<Navigate to="products" replace />} />
+              <Route path="dashboard" element={<DashboardPage />} />
               <Route path="products" element={<AdminProductsPage />} />
               <Route path="orders" element={<AdminOrdersPage />} />
               <Route path="customers" element={<AdminCustomersPage />} />
